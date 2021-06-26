@@ -75,14 +75,17 @@ if __name__ == '__main__':
     duration = balls[0].get_drop_time()
     n_frames = duration * framerate
 
-    if input(f"the anumation will take {int(n_frames)} frames\nproceed? [Y/n]") == 'n':
+    if input(f"the anumation will take {int(n_frames*2)} frames\nproceed? [Y/n]") == 'n':
         exit
 
     delta = 1 / framerate
     frames = []
+    # falling
     for frame_no in range(int(n_frames)):
         time = frame_no * delta
         frames.append(Frame(width=frame_width, height=frame_height,
                       bg_color=(0, 0, 0), balls=balls, time=time))
+    # bouncing
+    frames += frames[::-1]
 
     write_frames(frames, output_path)
