@@ -1,6 +1,8 @@
 <frame width> <frame height>
 <frame bg r> <frame bg g> <frame bg b>
 
+<number of circles>
+
 <circle 1 radius in pixels> <circle 1 center x> <circle 1 center y>
 <circle 1 r> <circle 1 g> <circle 1 b>
 
