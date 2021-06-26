@@ -16,8 +16,9 @@ struct Circle
 
 int main()
 {
-    int frameWidth, frameHeight, nCircles;
+    int frameWidth, frameHeight, nCircles, x, y;
     unsigned short int tempR, tempG, tempB;
+    bool set;
     uint8_t bgR, bgG, bgB;
     std::vector<Circle> circles;
 
@@ -39,5 +40,35 @@ int main()
     }
 
     // output the header to stdout
-    std::cout << "P6\n" << frameWidth << ' ' << frameHeight << "\n255\n";
+    std::cout << "P6\n"
+              << frameWidth << ' ' << frameHeight << "\n255\n";
+
+    // print the pixels
+    for (int i = 0; i < frameHeight; i++)
+        for (int j = 0; j < frameWidth; j++)
+        {
+            x = j;
+            y = frameHeight - i - 1;
+
+            set = false;
+
+            for (Circle c : circles)
+            {
+                if (distance(c.centerX, c.centerY, x, y) <= c.radius)
+                {
+                    set = true;
+                    tempR = c.r;
+                    tempG = c.g;
+                    tempB = c.b;
+                }
+                else if (!set)
+                {
+                    tempR = bgR;
+                    tempG = bgG;
+                    tempB = bgB;
+                }
+            }
+
+            printf("%c%c%c", tempR, tempG, tempB);
+        }
 }
