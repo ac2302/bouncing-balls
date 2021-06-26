@@ -37,4 +37,7 @@ int main()
         newCircle.b = tempB & 0xff;
         circles.push_back(newCircle);
     }
+
+    // output the header to stdout
+    std::cout << "P6\n" << frameWidth << ' ' << frameHeight << "\n255\n";
 }
