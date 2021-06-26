@@ -41,9 +41,9 @@ class Frame:
 
 def write_frames(frames, path):
     os.system(f"rm -r {path}")
-    os.system(f"mkdir {path}")
+    os.system(f"mkdir -p {path}{os.path.sep}temp")
     for (index, frame) in enumerate(frames):
-        with open(f"{path}{os.path.sep}{index:06d}", 'x') as f:
+        with open(f"{path}{os.path.sep}temp{os.path.sep}{index:06d}", 'x') as f:
             print(frame.get_text_rep(), file=f)
 
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     frame_width = int(input("frame width: "))
     frame_height = int(input("frame height: "))
     framerate = int(input("framerate: "))
-    g = abs(float(input("g in px/sec^2: ")))  # g in frames / sec^2
+    gravity = abs(float(input("g in px/sec^2: ")))  # g in frames / sec^2
 
     num_balls = int(input("number of balls: "))
     balls = []
@@ -70,7 +70,7 @@ if __name__ == '__main__':
         b = int(input("color b: "))
 
         balls.append(
-            Ball(x=x, radius=radius, height=height, g=g, color=(r, g, b)))
+            Ball(x=x, radius=radius, height=height, g=gravity, color=(r, g, b)))
 
     duration = balls[0].get_drop_time()
     n_frames = duration * framerate
